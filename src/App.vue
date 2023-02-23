@@ -1,40 +1,20 @@
 <template>
   <div class="app">
-    <Navbar/>
+    <Navbar />
     <router-view></router-view>
   </div>
 </template>
 
-
 <script>
-
-import {mapActions, mapGetters} from "vuex";
-import Navbar from './components/Navbar.vue';
-import Main from "./pages/main.vue";
+import Navbar from "./components/Navbar.vue";
 
 export default {
-  components: {Main, Navbar},
+  components: { Navbar },
   data() {
-    return {}
+    return {};
   },
-  methods: {
-    ...mapActions({
-      getList: "quotes/getQuotes"
-    }),
-
-    getQuotesList() {
-      this.getList()
-    }
-  },
-  computed: {
-    ...mapGetters({
-      quotesList: 'quotes/quotesList'
-    })
-  },
-
-
-}
+  methods: {},
+};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
