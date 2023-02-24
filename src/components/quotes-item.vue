@@ -1,11 +1,31 @@
 <template>
   <div class="quote">
     <div class="quote--content p-10">
+      <div v-if="buttons" class="flex justify-end">
+        <button
+          class="quote--content-btns"
+          @click.stop="$emit('edit', quote.id)"
+        >
+          <img alt="icons" src="src/static/icons/pencil.svg" />
+        </button>
+        <button
+          class="quote--content-btns"
+          @click.stop="$emit('remove', quote.id)"
+        >
+          <img alt="icons" src="src/static/icons/delete.svg" />
+        </button>
+      </div>
       <div class="quote--content-text">
         {{ quote.content }}
       </div>
       <div class="quote--content-author">
         <span>~{{ quote.author }}</span>
+      </div>
+      <div class="quote--content-tags">
+        <span class="mr-1">Tags:</span>
+        <span v-for="(tag, index) in quote.tags" :key="index" class="mr-1"
+          >{{ tag }}
+        </span>
       </div>
     </div>
   </div>
@@ -13,38 +33,57 @@
 
 <script>
 export default {
+  emits: ["edit", "remove"],
   props: {
     quote: {
       type: Object,
       default: () => ({}),
       required: true,
     },
+    buttons: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .quote {
   border: 1px solid #181823;
   border-radius: 12px;
   margin: 15px auto;
-}
 
-.quote--content {
-  display: flex;
-  flex-direction: column;
-  background: rgba(83, 127, 231, 0.1);
-}
+  &--content {
+    display: flex;
+    flex-direction: column;
+    background: rgba(83, 127, 231, 0.1);
 
-.quote--content-text {
-  font-style: italic;
-  font-size: 18px;
-}
+    &-text {
+      font-style: italic;
+      font-size: 18px;
+    }
 
-.quote--content-author {
-  margin-top: 10px;
-  font-weight: 600;
-  font-size: 16px;
-  align-self: end;
+    &-author {
+      margin-top: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      align-self: end;
+    }
+
+    &-tags {
+      margin-top: 10px;
+      font-weight: 300;
+      font-size: 12px;
+      align-self: end;
+    }
+
+    &-btns {
+      height: 25px;
+      width: 25px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+  }
 }
 </style>

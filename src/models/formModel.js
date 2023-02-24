@@ -1,12 +1,12 @@
+import uuidGenerator from "@/helpers/uuidGenerator";
+
 export default function FormModel() {
   return {
-    _id: "",
-    author: String,
-    content: String,
+    id: uuidGenerator(),
+    author: "",
+    content: "",
     tags: [],
-    authorSlug: String,
-    length: Number,
-    dateAdded: new Date(),
-    dateModified: new Date(),
+    dateAdded: Date.now(),
+    dateModified: Date.now(),
   };
 }

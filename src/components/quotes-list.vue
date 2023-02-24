@@ -6,53 +6,93 @@
     <transition-group name="quote-list" tag="div">
       <quotes-item
         v-for="quote in filteredQuotes"
-        :key="quote._id"
+        :key="quote.id"
+        :buttons="buttons"
         :quote="quote"
+        @click="viewQuote(quote.id)"
+        @edit="edit"
+        @remove="remove"
       />
     </transition-group>
-    <div class="pagination">
-      <div
-        v-for="pageNumber in totalPages"
-        :key="pageNumber"
-        :class="{
-          'pagination--current-page': page === pageNumber,
-        }"
-        class="pagination--page-number"
-        @click="clickPage(pageNumber)"
-      >
-        {{ pageNumber }}
+  </div>
+  <my-modal v-model:show="modalVisible">
+    <quotes-item :quote="selectedQuote" />
+  </my-modal>
+  <my-modal v-model:show="editModal">
+    <create-form v-model="editForm" :text="'Edit'" @submit="submit" />
+  </my-modal>
+  <my-modal v-model:show="removeModal">
+    <div class="remove">
+      <span class="remove--text">Delete this quote ?</span>
+      <div class="remove--btns">
+        <button @click="deleteRequest">Yes</button>
+        <button @click="hideRemoveModal">No</button>
       </div>
     </div>
-  </div>
+  </my-modal>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import QuotesItem from "@/components/quotes-item.vue";
+import CreateForm from "@/components/create-form.vue";
 
 export default {
-  components: { QuotesItem },
-  props: {},
+  components: { CreateForm, QuotesItem },
+  data() {
+    return {
+      modalVisible: false,
+      editModal: false,
+      removeModal: false,
+      selectedQuote: {},
+      selectedToDelete: {},
+      buttons: true,
+      editForm: {},
+    };
+  },
   methods: {
     ...mapActions({
       getList: "quotes/getQuotes",
-      loadMoreQuotes: "quotes/loadMoreQuotes",
+      editQuote: "quotes/editQuote",
+      removeQuote: "quotes/removeQuote",
     }),
-
+    viewQuote(id) {
+      this.selectedQuote = this.filteredQuotes.find((el) => el.id === id);
+      this.openModal();
+    },
+    openModal() {
+      this.modalVisible = true;
+    },
+    hideModal() {
+      this.editModal = false;
+    },
     async getQuotesList() {
       await this.getList();
     },
-    async clickPage(number) {
-      await this.loadMoreQuotes(number);
+    edit(id) {
+      this.editModal = true;
+      this.editForm = this.filteredQuotes.find((el) => el.id === id);
+    },
+    remove(id) {
+      this.removeModal = true;
+      this.selectedToDelete = id;
+    },
+    hideRemoveModal() {
+      this.removeModal = false;
+    },
+    submit() {
+      const { id } = this.editForm;
+      this.editQuote({ id: id, formData: this.editForm });
+      this.hideModal();
+    },
+    deleteRequest() {
+      this.removeQuote(this.selectedToDelete);
+      this.hideRemoveModal();
     },
   },
   computed: {
     ...mapGetters({
       filteredQuotes: "quotes/filteredQuotes",
-    }),
-    ...mapState({
-      page: (state) => state.quotes.page,
-      totalPages: (state) => state.quotes.totalPages,
     }),
   },
   mounted() {
@@ -76,23 +116,30 @@ export default {
   color: #181823;
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.remove {
   padding: 20px;
 
-  &--current-page {
-    color: #537fe7;
-    padding: 10px 15px !important;
+  &--text {
+    display: block;
+    text-align: center;
   }
 
-  &--page-number {
-    border: 1px solid #537fe7;
-    padding: 10px;
-    border-radius: 6px;
-    margin: 0 5px;
-    cursor: pointer;
+  &--btns {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      width: 100px;
+      border: 1px solid #c0eef2;
+      border-radius: 6px;
+      padding: 10px 15px;
+
+      &:hover {
+        background: #537fe7;
+        color: white;
+      }
+    }
   }
 }
 

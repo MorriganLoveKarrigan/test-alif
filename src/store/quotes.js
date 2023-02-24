@@ -8,15 +8,11 @@ export const quotes = {
     selectedTag: "",
     selectedDateSort: "",
     selectedAuthor: "",
-    page: 1,
-    limit: 10,
-    totalPages: 0,
     sortOptions: [
       { value: "author", text: "By author" },
       { value: "content", text: "By content" },
     ],
     sortDateOptions: [
-      { value: "All", text: "All" },
       { value: "dateAdded", text: "By added date" },
       { value: "dateModified", text: "By modified date" },
     ],
@@ -57,9 +53,9 @@ export const quotes = {
     uniqueAuthors(state) {
       const allAuthors = state.quotes.map((quote) => quote.author);
       const uniqueAuthors = [...new Set(allAuthors)];
-      const allAuthor = { text: "All", value: "All" };
+      const all = { text: "All", value: "All" };
       return [
-        allAuthor,
+        all,
         ...uniqueAuthors.map((author) => ({ text: author, value: author })),
       ];
     },
@@ -78,7 +74,7 @@ export const quotes = {
     //     });
     //   }
     // },
-    filteredQuotes(state, getters) {
+    filteredQuotes(state) {
       let quotes = state.quotes;
 
       if (state.searchQuery) {
@@ -109,14 +105,23 @@ export const quotes = {
       }
 
       if (state.selectedDateSort) {
-        quotes = quotes.sort(
-          (quote1, quote2) =>
-            new Date(quote1[state.selectedDateSort]) -
-            new Date(quote2[state.selectedDateSort])
-        );
+        console.log(state.selectedDateSort);
+        return quotes.sort((quote1, quote2) => {
+          if (quote2[state.selectedDateSort] < quote1[state.selectedDateSort])
+            return 1;
+          else if (
+            quote2[state.selectedDateSort] > quote1[state.selectedDateSort]
+          ) {
+            return -1;
+          }
+          return 0;
+        });
       }
-
       return quotes;
+    },
+    randomQuote(state) {
+      const randomIndex = Math.floor(Math.random() * state.quotes.length);
+      return state.quotes[randomIndex];
     },
   },
   mutations: {
@@ -125,9 +130,6 @@ export const quotes = {
     },
     setLoading(state, bool) {
       state.isQuotesLoading = bool;
-    },
-    setPage(state, page) {
-      state.page = page;
     },
     setSelectedSort(state, selectedSort) {
       state.selectedSort = selectedSort;
@@ -141,28 +143,16 @@ export const quotes = {
     setSelectedDateSort(state, selectedDateSort) {
       state.selectedDateSort = selectedDateSort;
     },
-    setTotalPages(state, totalPages) {
-      state.totalPages = totalPages;
-    },
     setSearchQuery(state, searchQuery) {
       state.searchQuery = searchQuery;
     },
   },
   actions: {
-    async getQuotes({ commit, state }) {
+    async getQuotes({ commit }) {
       commit("setLoading", true);
       let url = "http://localhost:3000/quotes";
       try {
-        let response = await axios.get(url, {
-          params: {
-            _page: state.page,
-            _limit: state.limit,
-          },
-        });
-        commit(
-          "setTotalPages",
-          Math.ceil(response.headers["x-total-count"] / state.limit)
-        );
+        let response = await axios.get(url);
         commit("setQuotes", response.data);
       } catch (e) {
         console.log(e);
@@ -170,23 +160,37 @@ export const quotes = {
         commit("setLoading", false);
       }
     },
-    async loadMoreQuotes({ state, commit }, number) {
-      let url = "http://localhost:3000/quotes";
+    async editQuote({ commit }, data) {
+      const { id, formData } = data;
+      let url = `http://localhost:3000/quotes/${id}`;
       try {
-        commit("setPage", number);
-        const response = await axios.get(url, {
-          params: {
-            _page: state.page,
-            _limit: state.limit,
-          },
-        });
-        commit(
-          "setTotalPages",
-          Math.ceil(response.headers["x-total-count"] / state.limit)
-        );
-        commit("setQuotes", [...state.posts, ...response.data]);
+        let res = await axios.put(url, formData);
+        commit("setQuotes", res.data);
+        console.log(res);
       } catch (e) {
         console.log(e);
+      }
+    },
+    async createQuote({ dispatch }, formData) {
+      let url = "http://localhost:3000/quotes";
+      try {
+        let res = await axios.post(url, formData);
+        console.log(res);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        dispatch("getQuotes");
+      }
+    },
+    async removeQuote({ dispatch }, id) {
+      let url = `http://localhost:3000/quotes/${id}`;
+      try {
+        let res = await axios.delete(url);
+        console.log(res);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        dispatch("getQuotes");
       }
     },
   },

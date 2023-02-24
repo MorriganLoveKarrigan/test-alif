@@ -1,32 +1,31 @@
 <template>
-  <form></form>
+  <form @click.prevent>
+    <my-input v-model="modelValue.author" :placeholder="'Quote Author'" />
+    <my-input v-model="modelValue.content" :placeholder="'Quote'" />
+    <my-input v-model="modelValue.tags" :placeholder="'Tags'" />
+    <div class="flex justify-center">
+      <my-button :text="text" @click="$emit('submit')" />
+    </div>
+  </form>
 </template>
 
 <script>
-import FormModel from "@/models/formModel";
+import MyInput from "@/components/UI/my-input.vue";
+import MyButton from "@/components/UI/my-button.vue";
 
 export default {
-  data() {
-    return {
-      formData: new FormModel(),
-    };
-  },
-  methods: {
-    uuidGenerator() {
-      let timestamp = new Date().getTime();
-      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-        /[xy]/g,
-        function (c) {
-          const r = (timestamp + Math.random() * 16) % 16 | 0;
-          timestamp = Math.floor(timestamp / 16);
-          return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
-        }
-      );
+  components: { MyButton, MyInput },
+  props: {
+    modelValue: {
+      type: Object,
+      default: () => ({}),
+    },
+    text: {
+      type: String,
+      default: "",
     },
   },
-  mounted() {
-    console.log(this.uuidGenerator());
-  },
+  methods: {},
 };
 </script>
 

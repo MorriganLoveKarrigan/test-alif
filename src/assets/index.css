@@ -11,3 +11,7 @@
 body {
     background-color: #E9F8F9;
 }
+
+.container {
+    padding: 0 20px;
+}

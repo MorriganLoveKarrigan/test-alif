@@ -1,8 +1,9 @@
 <template>
-  <form class="sidebar-form" @click.prevent>
+  <form class="sidebar-form" @click.stop>
     <div>
       <my-input
         :model-value="searchQuery"
+        :placeholder="'Search...'"
         @update:model-value="setSearchedQuery"
       />
     </div>

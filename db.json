@@ -1,7 +1,7 @@
 {
   "quotes": [
     {
-      "_id": "Wp2A_oOWNEq",
+      "id": "Wp2A_oOWNEq",
       "author": "Muhammad Ali",
       "content": "It's just a job. Grass grows, birds fly, waves pound the sand. I beat people up.",
       "tags": [
@@ -9,11 +9,11 @@
       ],
       "authorSlug": "muhammad-ali",
       "length": 80,
-      "dateAdded": "2022-04-06",
-      "dateModified": "2022-05-08"
+      "dateAdded": "1649185200000",
+      "dateModified": "1651950000000"
     },
     {
-      "_id": "lTm3ZNHDrh7",
+      "id": "lTm3ZNHDrh7",
       "author": "Bob Knight",
       "content": "You don't play against opponents, you play against the game of basketball.",
       "tags": [
@@ -22,11 +22,11 @@
       ],
       "authorSlug": "bob-knight",
       "length": 74,
-      "dateAdded": "2022-05-06",
-      "dateModified": "2022-06-08"
+      "dateAdded": "1651777200000",
+      "dateModified": "1654628400000"
     },
     {
-      "_id": "S78ad3jDcyA",
+      "id": "S78ad3jDcyA",
       "author": "John Madden",
       "content": "The fewer rules a coach has, the fewer rules there are for players to break.",
       "tags": [
@@ -35,11 +35,11 @@
       ],
       "authorSlug": "john-madden",
       "length": 76,
-      "dateAdded": "2022-02-06",
-      "dateModified": "2022-03-08"
+      "dateAdded": "1644087600000",
+      "dateModified": "1646679600000"
     },
     {
-      "_id": "Yul4uqMwfA1",
+      "id": "Yul4uqMwfA1",
       "author": "Arnold Palmer",
       "content": "What other people may find in poetry or art museums, I find in the flight of a good drive.",
       "tags": [
@@ -48,11 +48,11 @@
       ],
       "authorSlug": "arnold-palmer",
       "length": 90,
-      "dateAdded": "2022-07-06",
-      "dateModified": "2022-07-08"
+      "dateAdded": "1657047600000",
+      "dateModified": "1657220400000"
     },
     {
-      "_id": "Hpo_qh-q76A",
+      "id": "Hpo_qh-q76A",
       "author": "Reggie Jackson (basketball, born 1990)",
       "content": "Fans don't boo nobodies.",
       "tags": [
@@ -61,11 +61,11 @@
       ],
       "authorSlug": "reggie-jackson-basketball-born-1990",
       "length": 24,
-      "dateAdded": "2022-07-06",
-      "dateModified": "2022-07-08"
+      "dateAdded": "1657047600000",
+      "dateModified": "1657047600000"
     },
     {
-      "_id": "Nr6_kltWU8x",
+      "id": "Nr6_kltWU8x",
       "author": "Hugo Black",
       "content": "When I was 40, my doctor advised me that a man in his 40s shouldn't play tennis. I heeded his advice carefully and could hardly wait until I reached 50 to start again.",
       "tags": [
@@ -74,11 +74,11 @@
       ],
       "authorSlug": "hugo-black",
       "length": 167,
-      "dateAdded": "2022-07-06",
-      "dateModified": "2022-07-08"
+      "dateAdded": "1657047600000",
+      "dateModified": "1657220400000"
     },
     {
-      "_id": "Gtt0T3mfPbx",
+      "id": "Gtt0T3mfPbx",
       "author": "Billie Jean King",
       "content": "Champions keep playing until they get it right.",
       "tags": [
@@ -87,11 +87,31 @@
       ],
       "authorSlug": "billie-jean-king",
       "length": 47,
-      "dateAdded": "2022-07-06",
-      "dateModified": "2022-07-08"
+      "dateAdded": "1657047600000",
+      "dateModified": "1657220400000"
     },
     {
-      "_id": "AxNf6c-G_KI",
+      "id": 123,
+      "author": "Oscar Wilde",
+      "content": "Be yourself everyone else is already taken.",
+      "tags": [
+        "inspiration"
+      ],
+      "dateAdded": "1677202860000",
+      "dateModified": "1677202860000"
+    },
+    {
+      "id": 16772213613257404,
+      "author": "Albert Einstein",
+      "content": "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.",
+      "tags": [
+        "science"
+      ],
+      "dateAdded": "1677203340000",
+      "dateModified": "1677203340000"
+    },
+    {
+      "id": "AxNf6c-G_KI",
       "author": "Rogers Hornsby",
       "content": "People ask me what I do in winter when there's no baseball. I'll tell you what I do. I stare out the window and wait for spring.",
       "tags": [
@@ -100,11 +120,11 @@
       ],
       "authorSlug": "rogers-hornsby",
       "length": 128,
-      "dateAdded": "2022-07-06",
-      "dateModified": "2022-07-08"
+      "dateAdded": "1657047600000",
+      "dateModified": "1657047600000"
     },
     {
-      "_id": "MNoB9t3dfeS",
+      "id": "MNoB9t3dfeS",
       "author": "Shaquille O'Neal",
       "content": "I'm tired of hearing about money, money, money, money, money. I just want to play the game, drink Pepsi, and wear Reebok.",
       "tags": [
@@ -113,11 +133,11 @@
       ],
       "authorSlug": "shaquille-o-neal",
       "length": 121,
-      "dateAdded": "2022-07-06",
-      "dateModified": "2022-07-08"
+      "dateAdded": "1657047600000",
+      "dateModified": "1657220400000"
     },
     {
-      "_id": "81hjl4B9wx2",
+      "id": "81hjl4B9wx2",
       "author": "Ernie Banks",
       "content": "The only way to prove that you're a good sport is to lose.",
       "tags": [
@@ -126,8 +146,8 @@
       ],
       "authorSlug": "ernie-banks",
       "length": 58,
-      "dateAdded": "2022-07-06",
-      "dateModified": "2022-07-08"
+      "dateAdded": "1657047600000",
+      "dateModified": "1657220400000"
     }
   ]
 }

@@ -1,6 +1,6 @@
 import main from "../pages/main-page.vue";
 import { createRouter, createWebHistory } from "vue-router";
-import About from "../pages/about-page.vue";
+import AuthorsPage from "@/pages/authors-page.vue";
 
 const routes = [
   {
@@ -8,8 +8,8 @@ const routes = [
     component: main,
   },
   {
-    path: "/about",
-    component: About,
+    path: "/authors",
+    component: AuthorsPage,
   },
 ];
 
