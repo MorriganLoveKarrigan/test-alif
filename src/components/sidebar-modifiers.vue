@@ -79,9 +79,18 @@ export default {
   height: max-content;
   border: 1px solid #c0eef2;
   padding: 15px;
-  border-radius: 12px;
   width: 50%;
+  border-radius: 12px;
   position: sticky;
   top: 15px;
 }
+
+@media (max-width: 900px)  {
+  .sidebar{
+    position: static !important;
+    width: 100% !important;
+    margin-left: 0;
+  }
+}
+
 </style>

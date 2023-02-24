@@ -105,7 +105,6 @@ export const quotes = {
       }
 
       if (state.selectedDateSort) {
-        console.log(state.selectedDateSort);
         return quotes.sort((quote1, quote2) => {
           if (quote2[state.selectedDateSort] < quote1[state.selectedDateSort])
             return 1;
@@ -166,7 +165,6 @@ export const quotes = {
       try {
         let res = await axios.put(url, formData);
         commit("setQuotes", res.data);
-        console.log(res);
       } catch (e) {
         console.log(e);
       }
@@ -175,7 +173,6 @@ export const quotes = {
       let url = "http://localhost:3000/quotes";
       try {
         let res = await axios.post(url, formData);
-        console.log(res);
       } catch (e) {
         console.log(e);
       } finally {
@@ -186,7 +183,6 @@ export const quotes = {
       let url = `http://localhost:3000/quotes/${id}`;
       try {
         let res = await axios.delete(url);
-        console.log(res);
       } catch (e) {
         console.log(e);
       } finally {

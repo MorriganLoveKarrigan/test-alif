@@ -1,6 +1,5 @@
 <template>
-  <div class="container flex justify-between">
-    <div></div>
+  <div class="my-container main-page flex justify-between">
     <quotes-list />
     <sidebar-modifiers />
   </div>
@@ -16,7 +15,15 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  padding: 0 15px;
+
+.main-page{
+  width: 100%;
 }
+
+@media (max-width: 900px)  {
+  .main-page{
+    flex-direction: column-reverse;
+  }
+}
+
 </style>

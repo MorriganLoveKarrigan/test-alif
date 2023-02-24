@@ -22,7 +22,6 @@ export const authors = {
         }
       });
       state.authors = Object.values(authors);
-      console.log(state.authors);
     },
   },
   actions: {

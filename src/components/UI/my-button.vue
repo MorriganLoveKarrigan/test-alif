@@ -22,7 +22,7 @@ export default {
   width: 200px;
   border-radius: 6px;
   text-align: center;
-
+  font-weight: 600;
   &:hover {
     background: #537fe7;
     color: white;

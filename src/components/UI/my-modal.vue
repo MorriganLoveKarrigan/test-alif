@@ -42,5 +42,14 @@ export default {
     min-width: 400px;
     padding: 20px;
   }
+
+  @media (max-width: 900px)  {
+    .modal {
+      &--content {
+        min-width: auto;
+        max-width: 400px;
+      }
+    }
+  }
 }
 </style>

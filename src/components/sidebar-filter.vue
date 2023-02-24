@@ -2,40 +2,40 @@
   <form class="sidebar-form" @click.stop>
     <div>
       <my-input
-        :model-value="searchQuery"
-        :placeholder="'Search...'"
-        @update:model-value="setSearchedQuery"
+          :model-value="searchQuery"
+          :placeholder="'Search...'"
+          @update:model-value="setSearchedQuery"
       />
     </div>
     <div class="flex justify-between my-4">
       <my-select
-        :model-value="selectedSort"
-        :options="sortOptions"
-        @update:model-value="setSelectedSort"
+          :model-value="selectedSort"
+          :options="sortOptions"
+          @update:model-value="setSelectedSort"
       />
       <my-select
-        :model-value="selectedTag"
-        :options="uniqueTags"
-        @update:model-value="setSelectedTag"
+          :model-value="selectedTag"
+          :options="uniqueTags"
+          @update:model-value="setSelectedTag"
       />
     </div>
     <div class="flex justify-between">
       <my-select
-        :model-value="selectedDateSort"
-        :options="sortDateOptions"
-        @update:model-value="setSelectedDateSort"
+          :model-value="selectedDateSort"
+          :options="sortDateOptions"
+          @update:model-value="setSelectedDateSort"
       />
       <my-select
-        :model-value="selectedAuthor"
-        :options="uniqueAuthors"
-        @update:model-value="setSelectedAuthor"
+          :model-value="selectedAuthor"
+          :options="uniqueAuthors"
+          @update:model-value="setSelectedAuthor"
       />
     </div>
   </form>
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapState } from "vuex";
+import {mapGetters, mapMutations, mapState} from "vuex";
 
 export default {
   data() {
@@ -65,7 +65,8 @@ export default {
       uniqueAuthors: "quotes/uniqueAuthors",
     }),
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
 

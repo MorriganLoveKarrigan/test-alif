@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="my-container">
     <authors-list :authors-list="authorsList" />
   </div>
 </template>

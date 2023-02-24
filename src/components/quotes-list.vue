@@ -1,6 +1,6 @@
 <template>
-  <div v-if="filteredQuotes.length === 0" class="text-center my-auto">
-    <span class="not-found">Not found...</span>
+  <div v-if="filteredQuotes.length === 0" class="text-center not-found--block my-auto">
+    <span class="not-found--text">Not found...</span>
   </div>
   <div v-else class="quotes-list">
     <transition-group name="quote-list" tag="div">
@@ -106,11 +106,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.quotes-list {
-  width: 50%;
-}
-
-.not-found {
+.not-found--block {
   font-size: 20px;
   line-height: 22px;
   color: #181823;
@@ -161,5 +157,11 @@ export default {
 
 .quote-list-move {
   transition: transform 0.4s ease;
+}
+
+@media (max-width: 900px)  {
+  .not-found--block{
+    padding: 15px 0 !important;
+  }
 }
 </style>
