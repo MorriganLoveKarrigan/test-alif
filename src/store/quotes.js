@@ -7,6 +7,7 @@ export const quotes = {
     selectedSort: "",
     selectedTag: "",
     selectedDateSort: "",
+    selectedAuthor: "",
     page: 1,
     limit: 10,
     totalPages: 0,
@@ -19,31 +20,32 @@ export const quotes = {
       { value: "dateAdded", text: "By added date" },
       { value: "dateModified", text: "By modified date" },
     ],
+    sortAuthorOptions: [],
     isQuotesLoading: false,
   }),
   getters: {
-    sortedQuotes(state) {
-      return [...state.quotes].sort((quote1, quote2) =>
-        quote1[state.selectedSort]?.localeCompare(quote2[state.selectedSort])
-      );
-    },
-    sortedAndSearchedQuotes(state, getters) {
-      return getters.sortedQuotes.filter(
-        (quote) =>
-          quote.content
-            .toLowerCase()
-            .includes(state.searchQuery.toLowerCase()) ||
-          quote.author.toLowerCase().includes(state.searchQuery.toLowerCase())
-      );
-    },
-    sortedAndSearchedAndTaggedQuotes(state, getters) {
-      if (state.selectedTag === "All") return getters.sortedAndSearchedQuotes;
-      else {
-        return getters.sortedAndSearchedQuotes.filter((quote) =>
-          quote.tags.includes(state.selectedTag)
-        );
-      }
-    },
+    // sortedQuotes(state) {
+    //   return [...state.quotes].sort((quote1, quote2) =>
+    //     quote1[state.selectedSort]?.localeCompare(quote2[state.selectedSort])
+    //   );
+    // },
+    // sortedAndSearchedQuotes(state, getters) {
+    //   return getters.sortedQuotes.filter(
+    //     (quote) =>
+    //       quote.content
+    //         .toLowerCase()
+    //         .includes(state.searchQuery.toLowerCase()) ||
+    //       quote.author.toLowerCase().includes(state.searchQuery.toLowerCase())
+    //   );
+    // },
+    // sortedAndSearchedAndTaggedQuotes(state, getters) {
+    //   if (state.selectedTag === "All") return getters.sortedAndSearchedQuotes;
+    //   else {
+    //     return getters.sortedAndSearchedQuotes.filter((quote) =>
+    //       quote.tags.includes(state.selectedTag)
+    //     );
+    //   }
+    // },
     uniqueTags(state) {
       const allTags = state.quotes.reduce((tags, quote) => {
         return tags.concat(quote.tags);
@@ -52,21 +54,30 @@ export const quotes = {
       const allTag = { text: "All", value: "All" };
       return [allTag, ...uniqueTags.map((tag) => ({ text: tag, value: tag }))];
     },
-    sortedAndSearchedAndTaggedAndSortedByDate(state, getters) {
-      const quotes = getters.sortedAndSearchedAndTaggedQuotes;
-      if (state.selectedDateSort === "All") {
-        return getters.sortedAndSearchedAndTaggedQuotes;
-      } else if (state.selectedDateSort === "dateAdded") {
-        return [...quotes].sort(
-          (quote1, quote2) =>
-            new Date(quote2.dateAdded) - new Date(quote1.dateAdded)
-        );
-      } else {
-        return [...quotes].sort((quote1, quote2) => {
-          new Date(quote2.dateModified) - new Date(quote1.dateModified);
-        });
-      }
+    uniqueAuthors(state) {
+      const allAuthors = state.quotes.map((quote) => quote.author);
+      const uniqueAuthors = [...new Set(allAuthors)];
+      const allAuthor = { text: "All", value: "All" };
+      return [
+        allAuthor,
+        ...uniqueAuthors.map((author) => ({ text: author, value: author })),
+      ];
     },
+    // sortedAndSearchedAndTaggedAndSortedByDate(state, getters) {
+    //   const quotes = getters.sortedAndSearchedAndTaggedQuotes;
+    //   if (state.selectedDateSort === "All") {
+    //     return getters.sortedAndSearchedAndTaggedQuotes;
+    //   } else if (state.selectedDateSort === "dateAdded") {
+    //     return [...quotes].sort(
+    //       (quote1, quote2) =>
+    //         new Date(quote2.dateAdded) - new Date(quote1.dateAdded)
+    //     );
+    //   } else {
+    //     return [...quotes].sort((quote1, quote2) => {
+    //       new Date(quote2.dateModified) - new Date(quote1.dateModified);
+    //     });
+    //   }
+    // },
     filteredQuotes(state, getters) {
       let quotes = state.quotes;
 
@@ -83,6 +94,11 @@ export const quotes = {
       if (state.selectedTag && state.selectedTag !== "All") {
         quotes = quotes.filter((quote) =>
           quote.tags.includes(state.selectedTag)
+        );
+      }
+      if (state.selectedAuthor && state.selectedAuthor !== "All") {
+        quotes = quotes.filter(
+          (quote) => quote.author === state.selectedAuthor
         );
       }
 
@@ -119,6 +135,9 @@ export const quotes = {
     setSelectedTag(state, selectedTag) {
       state.selectedTag = selectedTag;
     },
+    setSelectedAuthor(state, selectedAuthor) {
+      state.selectedAuthor = selectedAuthor;
+    },
     setSelectedDateSort(state, selectedDateSort) {
       state.selectedDateSort = selectedDateSort;
     },
@@ -149,6 +168,25 @@ export const quotes = {
         console.log(e);
       } finally {
         commit("setLoading", false);
+      }
+    },
+    async loadMoreQuotes({ state, commit }, number) {
+      let url = "http://localhost:3000/quotes";
+      try {
+        commit("setPage", number);
+        const response = await axios.get(url, {
+          params: {
+            _page: state.page,
+            _limit: state.limit,
+          },
+        });
+        commit(
+          "setTotalPages",
+          Math.ceil(response.headers["x-total-count"] / state.limit)
+        );
+        commit("setQuotes", [...state.posts, ...response.data]);
+      } catch (e) {
+        console.log(e);
       }
     },
   },

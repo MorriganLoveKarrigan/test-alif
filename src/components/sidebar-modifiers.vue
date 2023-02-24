@@ -1,6 +1,9 @@
 <template>
   <div class="sidebar">
     <sidebar-filter />
+    <div class="my-4 text-center">
+      <my-button :text="'Add Quote'" />
+    </div>
   </div>
 </template>
 
@@ -9,6 +12,11 @@ import SidebarFilter from "@/components/sidebar-filter.vue";
 
 export default {
   components: { SidebarFilter },
+  data() {
+    return {
+      dialogVisible: false,
+    };
+  },
 };
 </script>
 

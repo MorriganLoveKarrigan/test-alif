@@ -24,10 +24,11 @@
         :options="sortDateOptions"
         @update:model-value="setSelectedDateSort"
       />
-      <my-select :options="options" />
-    </div>
-    <div class="my-4 text-center">
-      <my-button :text="'Create'" />
+      <my-select
+        :model-value="selectedAuthor"
+        :options="uniqueAuthors"
+        @update:model-value="setSelectedAuthor"
+      />
     </div>
   </form>
 </template>
@@ -37,22 +38,7 @@ import { mapGetters, mapMutations, mapState } from "vuex";
 
 export default {
   data() {
-    return {
-      options: [
-        {
-          text: "1",
-          value: "1",
-        },
-        {
-          text: "2",
-          value: "2",
-        },
-        {
-          text: "3",
-          value: "3",
-        },
-      ],
-    };
+    return {};
   },
   methods: {
     ...mapMutations({
@@ -60,6 +46,7 @@ export default {
       setSelectedSort: "quotes/setSelectedSort",
       setSelectedTag: "quotes/setSelectedTag",
       setSelectedDateSort: "quotes/setSelectedDateSort",
+      setSelectedAuthor: "quotes/setSelectedAuthor",
     }),
   },
   computed: {
@@ -69,10 +56,12 @@ export default {
       sortOptions: (state) => state.quotes.sortOptions,
       sortDateOptions: (state) => state.quotes.sortDateOptions,
       selectedDateSort: (state) => state.quotes.selectedDateSort,
+      selectedAuthor: (state) => state.quotes.selectedAuthor,
       searchQuery: (state) => state.quotes.searchQuery,
     }),
     ...mapGetters({
       uniqueTags: "quotes/uniqueTags",
+      uniqueAuthors: "quotes/uniqueAuthors",
     }),
   },
   mounted() {},

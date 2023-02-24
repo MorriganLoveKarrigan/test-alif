@@ -1,23 +1,33 @@
 <template>
-  <div class="quotes-list">
-    <div
-      v-if="sortedAndSearchedQuotes.length === 0"
-      class="text-center mt-auto"
-    >
-      <span class="not-found">Not found...</span>
-    </div>
-    <transition-group v-else name="quote-list" tag="div">
+  <div v-if="filteredQuotes.length === 0" class="text-center my-auto">
+    <span class="not-found">Not found...</span>
+  </div>
+  <div v-else class="quotes-list">
+    <transition-group name="quote-list" tag="div">
       <quotes-item
         v-for="quote in filteredQuotes"
         :key="quote._id"
         :quote="quote"
       />
     </transition-group>
+    <div class="pagination">
+      <div
+        v-for="pageNumber in totalPages"
+        :key="pageNumber"
+        :class="{
+          'pagination--current-page': page === pageNumber,
+        }"
+        class="pagination--page-number"
+        @click="clickPage(pageNumber)"
+      >
+        {{ pageNumber }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 import QuotesItem from "@/components/quotes-item.vue";
 
 export default {
@@ -26,21 +36,23 @@ export default {
   methods: {
     ...mapActions({
       getList: "quotes/getQuotes",
+      loadMoreQuotes: "quotes/loadMoreQuotes",
     }),
 
     async getQuotesList() {
       await this.getList();
     },
+    async clickPage(number) {
+      await this.loadMoreQuotes(number);
+    },
   },
   computed: {
     ...mapGetters({
-      sortedQuotes: "quotes/sortedQuotes",
-      sortedAndSearchedQuotes: "quotes/sortedAndSearchedQuotes",
-      sortedAndSearchedAndTaggedQuotes:
-        "quotes/sortedAndSearchedAndTaggedQuotes",
-      sortedAndSearchedAndTaggedAndSortedByDate:
-        "quotes/sortedAndSearchedAndTaggedAndSortedByDate",
       filteredQuotes: "quotes/filteredQuotes",
+    }),
+    ...mapState({
+      page: (state) => state.quotes.page,
+      totalPages: (state) => state.quotes.totalPages,
     }),
   },
   mounted() {
@@ -53,9 +65,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .quotes-list {
-  margin: auto;
   width: 50%;
 }
 
@@ -65,30 +76,43 @@ export default {
   color: #181823;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  &--current-page {
+    color: #537fe7;
+    padding: 10px 15px !important;
+  }
+
+  &--page-number {
+    border: 1px solid #537fe7;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+}
+
+.quote-list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+
 .quote-list-enter-active,
 .quote-list-leave-active {
-  transition: all 0.5s ease-in-out;
+  transition: all 0.4s ease;
 }
 
 .quote-list-enter-from,
 .quote-list-leave-to {
   opacity: 0;
-  transform: translateY(130px);
+  transform: translateX(130px);
 }
 
-.quote-list-move,
-.quote-list-enter-active,
-.quote-list-leave-active {
-  transition: all 0.5s ease-in-out;
-}
-
-.quote-list-enter-from,
-.quote-list-leave-to {
-  opacity: 0;
-  transform: translateY(100px);
-}
-
-.quote-list-leave-active {
-  position: absolute;
+.quote-list-move {
+  transition: transform 0.4s ease;
 }
 </style>
