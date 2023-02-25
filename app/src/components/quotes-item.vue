@@ -80,6 +80,8 @@ export default {
       font-weight: 600;
       font-size: 16px;
       align-self: end;
+      display: flex;
+      justify-content: end;
     }
 
     &-tags {
@@ -87,6 +89,8 @@ export default {
       font-weight: 300;
       font-size: 12px;
       align-self: end;
+      display: flex;
+      justify-content: end;
     }
 
     &-btns {
