@@ -1,0 +1,7 @@
+version: '3.1'
+services:
+  quote-app:
+    image: morriganlovekarrigan/alif-test
+    container_name: quote-app
+    ports:
+      - 3001:3838

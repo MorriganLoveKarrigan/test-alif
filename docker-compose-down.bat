@@ -1,5 +1,5 @@
 cd app
 docker-compose down
-cd ../data
+cd ../json-server
 docker-compose down
 pause
