@@ -127,9 +127,6 @@ export const quotes = {
     setQuotes(state, quotes) {
       state.quotes = quotes;
     },
-    setLoading(state, bool) {
-      state.isQuotesLoading = bool;
-    },
     setSelectedSort(state, selectedSort) {
       state.selectedSort = selectedSort;
     },
@@ -148,20 +145,17 @@ export const quotes = {
   },
   actions: {
     async getQuotes({ commit }) {
-      commit("setLoading", true);
-      let url = "http://localhost:3000/quotes";
+      let url = `${import.meta.env.VITE_DB_URL}/quotes` ;
       try {
         let response = await axios.get(url);
         commit("setQuotes", response.data);
       } catch (e) {
         console.log(e);
-      } finally {
-        commit("setLoading", false);
       }
     },
     async editQuote({ commit }, data) {
       const { id, formData } = data;
-      let url = `http://localhost:3000/quotes/${id}`;
+      let url = `${import.meta.env.VITE_DB_URL}/quotes/${id}`
       try {
         let res = await axios.put(url, formData);
         commit("setQuotes", res.data);
@@ -170,7 +164,7 @@ export const quotes = {
       }
     },
     async createQuote({ dispatch }, formData) {
-      let url = "http://localhost:3000/quotes";
+      let url = `${import.meta.env.VITE_DB_URL}/quotes`
       try {
         let res = await axios.post(url, formData);
       } catch (e) {
@@ -180,7 +174,7 @@ export const quotes = {
       }
     },
     async removeQuote({ dispatch }, id) {
-      let url = `http://localhost:3000/quotes/${id}`;
+      let url = `${import.meta.env.VITE_DB_URL}/quotes/${id}`
       try {
         let res = await axios.delete(url);
       } catch (e) {

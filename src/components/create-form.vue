@@ -1,10 +1,12 @@
 <template>
   <form @click.prevent>
-    <my-input v-model="modelValue.author" :placeholder="'Quote Author'" />
-    <my-input v-model="modelValue.content" :placeholder="'Quote'" />
-    <my-input v-model="modelValue.tags" :placeholder="'Tags'" />
+    <my-input class="mt-4" v-model="modelValue.author" :placeholder="'Author'" />
+    <span class="validate-error" v-if="validate.author">{{ validate.author }}</span>
+    <my-input class="mt-4" v-model="modelValue.content" :placeholder="'Quote'" />
+    <span class="validate-error" v-if="validate.content">{{ validate.content }}</span>
+    <my-input class="mt-4" v-model="modelValue.tags" :placeholder="'Tags'" />
     <div class="flex justify-center">
-      <my-button :text="text" @click="$emit('submit')" />
+      <my-button :text="text" @click="submitForm"/>
     </div>
   </form>
 </template>
@@ -25,8 +27,43 @@ export default {
       default: "",
     },
   },
-  methods: {},
+  data(){
+    return {
+      validate: {
+        author: "",
+        content: "",
+      }
+    }
+  },
+  methods: {
+    validateForm() {
+      let isValid = true;
+      if (!this.modelValue.author) {
+        this.validate.author = 'Author name is required';
+        isValid = false;
+      } else {
+        this.validate.author = '';
+      }
+      if (!this.modelValue.content) {
+        this.validate.content = 'Quote is required';
+        isValid = false;
+      }
+      return isValid;
+    },
+    submitForm(){
+      if (this.validateForm()) {
+        this.$emit('submit')
+      }
+    },
+  },
+
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.validate-error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+</style>

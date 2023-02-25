@@ -26,7 +26,7 @@ export const authors = {
   },
   actions: {
     async getAuthors({ commit }) {
-      let url = "http://localhost:3000/quotes";
+      let url = `${import.meta.env.VITE_DB_URL}/quotes`
       try {
         let response = await axios.get(url);
         commit("setAuthors", response.data);

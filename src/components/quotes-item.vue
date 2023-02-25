@@ -6,13 +6,13 @@
           class="quote--content-btns"
           @click.stop="$emit('edit', quote.id)"
         >
-          <img alt="icons" src="src/static/icons/pencil.svg" />
+          <img alt="icons" src="../../src/static/icons/pencil.svg" />
         </button>
         <button
           class="quote--content-btns"
           @click.stop="$emit('remove', quote.id)"
         >
-          <img alt="icons" src="src/static/icons/delete.svg" />
+          <img alt="icons" src="../../src/static/icons/delete.svg"  />
         </button>
       </div>
       <div class="quote--content-text">
@@ -53,6 +53,7 @@ export default {
   border: 1px solid #181823;
   border-radius: 12px;
   margin: 15px auto;
+  cursor: pointer;
 
   &--content {
     display: flex;
@@ -83,6 +84,11 @@ export default {
       width: 25px;
       margin-left: 5px;
       cursor: pointer;
+
+      &:hover {
+        border: 1px solid #FFF;
+        border-radius: 6px;
+      }
     }
   }
 }
