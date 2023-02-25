@@ -2,15 +2,13 @@
   "quotes": [
     {
       "id": "Wp2A_oOWNEq",
-      "author": "Muhammad Ali",
+      "author": "Muhammad-Ali",
       "content": "It's just a job. Grass grows, birds fly, waves pound the sand. I beat people up.",
       "tags": [
         "sports"
       ],
-      "authorSlug": "muhammad-ali",
-      "length": 80,
-      "dateAdded": "1649185200000",
-      "dateModified": "1651950000000"
+      "dateAdded": 1649185200000,
+      "dateModified": 1677339455668
     },
     {
       "id": "lTm3ZNHDrh7",
@@ -20,10 +18,8 @@
         "sports",
         "competition"
       ],
-      "authorSlug": "bob-knight",
-      "length": 74,
-      "dateAdded": "1651777200000",
-      "dateModified": "1654628400000"
+      "dateAdded": 1651777200000,
+      "dateModified": 1677343939794
     },
     {
       "id": "S78ad3jDcyA",
@@ -33,10 +29,8 @@
         "sports",
         "competition"
       ],
-      "authorSlug": "john-madden",
-      "length": 76,
-      "dateAdded": "1644087600000",
-      "dateModified": "1646679600000"
+      "dateAdded": 1644087600000,
+      "dateModified": 1646679600000
     },
     {
       "id": "Yul4uqMwfA1",
@@ -46,10 +40,8 @@
         "sports",
         "competition"
       ],
-      "authorSlug": "arnold-palmer",
-      "length": 90,
-      "dateAdded": "1657047600000",
-      "dateModified": "1657220400000"
+      "dateAdded": 1657047600000,
+      "dateModified": 1657220400000
     },
     {
       "id": "Hpo_qh-q76A",
@@ -59,10 +51,8 @@
         "sports",
         "competition"
       ],
-      "authorSlug": "reggie-jackson-basketball-born-1990",
-      "length": 24,
-      "dateAdded": "1657047600000",
-      "dateModified": "1657047600000"
+      "dateAdded": 1657047600000,
+      "dateModified": 1657047600000
     },
     {
       "id": "Nr6_kltWU8x",
@@ -72,10 +62,8 @@
         "sports",
         "humorous"
       ],
-      "authorSlug": "hugo-black",
-      "length": 167,
-      "dateAdded": "1657047600000",
-      "dateModified": "1657220400000"
+      "dateAdded": 1657047600000,
+      "dateModified": 1657220400000
     },
     {
       "id": "Gtt0T3mfPbx",
@@ -85,10 +73,8 @@
         "sports",
         "competition"
       ],
-      "authorSlug": "billie-jean-king",
-      "length": 47,
-      "dateAdded": "1657047600000",
-      "dateModified": "1657220400000"
+      "dateAdded": 1657047600000,
+      "dateModified": 1657220400000
     },
     {
       "id": 123,
@@ -97,8 +83,8 @@
       "tags": [
         "inspiration"
       ],
-      "dateAdded": "1677202860000",
-      "dateModified": "1677202860000"
+      "dateAdded": 1677202860000,
+      "dateModified": 1677202860000
     },
     {
       "id": 16772213613257404,
@@ -107,8 +93,8 @@
       "tags": [
         "science"
       ],
-      "dateAdded": "1677203340000",
-      "dateModified": "1677203340000"
+      "dateAdded": 1677203340000,
+      "dateModified": 1677203340000
     },
     {
       "id": "AxNf6c-G_KI",
@@ -118,10 +104,8 @@
         "sports",
         "competition"
       ],
-      "authorSlug": "rogers-hornsby",
-      "length": 128,
-      "dateAdded": "1657047600000",
-      "dateModified": "1657047600000"
+      "dateAdded": 1657047600000,
+      "dateModified": 1657047600000
     },
     {
       "id": "MNoB9t3dfeS",
@@ -131,10 +115,8 @@
         "sports",
         "humorous"
       ],
-      "authorSlug": "shaquille-o-neal",
-      "length": 121,
-      "dateAdded": "1657047600000",
-      "dateModified": "1657220400000"
+      "dateAdded": 1657047600000,
+      "dateModified": 1657220400000
     },
     {
       "id": "81hjl4B9wx2",
@@ -144,10 +126,8 @@
         "sports",
         "competition"
       ],
-      "authorSlug": "ernie-banks",
-      "length": 58,
-      "dateAdded": "1657047600000",
-      "dateModified": "1657220400000"
+      "dateAdded": 1657047600000,
+      "dateModified": 1657220400000
     }
   ]
 }
