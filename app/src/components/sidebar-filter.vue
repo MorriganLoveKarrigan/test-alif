@@ -9,11 +9,13 @@
     </div>
     <div class="flex justify-between my-4">
       <my-select
+          :label="'Order by'"
           :model-value="selectedSort"
           :options="sortOptions"
           @update:model-value="setSelectedSort"
       />
       <my-select
+          :label="'Sort by tags '"
           :model-value="selectedTag"
           :options="uniqueTags"
           @update:model-value="setSelectedTag"
@@ -21,11 +23,13 @@
     </div>
     <div class="flex justify-between">
       <my-select
+          :label="'Order by date '"
           :model-value="selectedDateSort"
           :options="sortDateOptions"
           @update:model-value="setSelectedDateSort"
       />
       <my-select
+          :label="'Sort by author '"
           :model-value="selectedAuthor"
           :options="uniqueAuthors"
           @update:model-value="setSelectedAuthor"
@@ -66,7 +70,11 @@ export default {
     }),
   },
   mounted() {
+    console.log('mounted')
   },
+  updated() {
+    console.log('updated')
+  }
 };
 </script>
 

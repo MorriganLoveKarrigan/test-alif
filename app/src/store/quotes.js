@@ -9,12 +9,12 @@ export const quotes = {
     selectedDateSort: "",
     selectedAuthor: "",
     sortOptions: [
-      { value: "author", text: "By author" },
-      { value: "content", text: "By content" },
+      {value: "author", text: "By author"},
+      {value: "content", text: "By content"},
     ],
     sortDateOptions: [
-      { value: "dateAdded", text: "By added date" },
-      { value: "dateModified", text: "By modified date" },
+      {value: "dateAdded", text: "By added date"},
+      {value: "dateModified", text: "By modified date"},
     ],
     sortAuthorOptions: [],
     isQuotesLoading: false,
@@ -43,20 +43,21 @@ export const quotes = {
     //   }
     // },
     uniqueTags(state) {
-      const allTags = state.quotes.reduce((tags, quote) => {
-        return tags.concat(quote.tags);
+      console.log(state)
+      const allTags = state.quotes.reduce((arr, quote) => {
+        return arr.concat(quote.tags);
       }, []);
       const uniqueTags = [...new Set(allTags)];
-      const allTag = { text: "All", value: "All" };
-      return [allTag, ...uniqueTags.map((tag) => ({ text: tag, value: tag }))];
+      const allTag = {text: "All", value: "All"};
+      return [allTag, ...uniqueTags.map((tag) => ({text: tag, value: tag}))];
     },
     uniqueAuthors(state) {
       const allAuthors = state.quotes.map((quote) => quote.author);
       const uniqueAuthors = [...new Set(allAuthors)];
-      const all = { text: "All", value: "All" };
+      const all = {text: "All", value: "All"};
       return [
         all,
-        ...uniqueAuthors.map((author) => ({ text: author, value: author })),
+        ...uniqueAuthors.map((author) => ({text: author, value: author})),
       ];
     },
     // sortedAndSearchedAndTaggedAndSortedByDate(state, getters) {
@@ -79,28 +80,28 @@ export const quotes = {
 
       if (state.searchQuery) {
         quotes = quotes.filter(
-          (quote) =>
-            quote.content
-              .toLowerCase()
-              .includes(state.searchQuery.toLowerCase()) ||
-            quote.author.toLowerCase().includes(state.searchQuery.toLowerCase())
+            (quote) =>
+                quote.content
+                    .toLowerCase()
+                    .includes(state.searchQuery.toLowerCase()) ||
+                quote.author.toLowerCase().includes(state.searchQuery.toLowerCase())
         );
       }
 
       if (state.selectedTag && state.selectedTag !== "All") {
         quotes = quotes.filter((quote) =>
-          quote.tags.includes(state.selectedTag)
+            quote.tags.includes(state.selectedTag)
         );
       }
       if (state.selectedAuthor && state.selectedAuthor !== "All") {
         quotes = quotes.filter(
-          (quote) => quote.author === state.selectedAuthor
+            (quote) => quote.author === state.selectedAuthor
         );
       }
 
       if (state.selectedSort) {
         quotes = quotes.sort((quote1, quote2) =>
-          quote1[state.selectedSort]?.localeCompare(quote2[state.selectedSort])
+            quote1[state.selectedSort]?.localeCompare(quote2[state.selectedSort])
         );
       }
 
@@ -109,7 +110,7 @@ export const quotes = {
           if (quote2[state.selectedDateSort] < quote1[state.selectedDateSort])
             return 1;
           else if (
-            quote2[state.selectedDateSort] > quote1[state.selectedDateSort]
+              quote2[state.selectedDateSort] > quote1[state.selectedDateSort]
           ) {
             return -1;
           }
@@ -144,8 +145,8 @@ export const quotes = {
     },
   },
   actions: {
-    async getQuotes({ commit }) {
-      let url = `${import.meta.env.VITE_DB_URL}/quotes` ;
+    async getQuotes({commit}) {
+      let url = `${import.meta.env.VITE_DB_URL}/quotes`;
       try {
         let response = await axios.get(url);
         commit("setQuotes", response.data);
@@ -153,27 +154,28 @@ export const quotes = {
         console.log(e);
       }
     },
-    async editQuote({ commit }, data) {
-      const { id, formData } = data;
+    async editQuote({ dispatch }, data) {
+      const {id, formData} = data;
       let url = `${import.meta.env.VITE_DB_URL}/quotes/${id}`
       try {
-        let res = await axios.put(url, formData);
-        commit("setQuotes", res.data);
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    async createQuote({ dispatch }, formData) {
-      let url = `${import.meta.env.VITE_DB_URL}/quotes`
-      try {
-        let res = await axios.post(url, formData);
+        await axios.put(url, formData);
       } catch (e) {
         console.log(e);
       } finally {
         dispatch("getQuotes");
       }
     },
-    async removeQuote({ dispatch }, id) {
+    async createQuote({ dispatch }, formData) {
+      let url = `${import.meta.env.VITE_DB_URL}/quotes`
+      try {
+         await axios.post(url, formData);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        dispatch("getQuotes");
+      }
+    },
+    async removeQuote({dispatch}, id) {
       let url = `${import.meta.env.VITE_DB_URL}/quotes/${id}`
       try {
         let res = await axios.delete(url);

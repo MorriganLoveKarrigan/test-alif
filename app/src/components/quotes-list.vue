@@ -1,25 +1,25 @@
 <template>
   <div v-if="filteredQuotes.length === 0" class="text-center not-found--block my-auto">
-    <span class="not-found--text">Not found...</span>
+    <span class="not-found--text">Not found...  =(</span>
   </div>
   <div v-else class="quotes-list">
     <transition-group name="quote-list" tag="div">
       <quotes-item
-        v-for="quote in filteredQuotes"
-        :key="quote.id"
-        :buttons="buttons"
-        :quote="quote"
-        @click="viewQuote(quote.id)"
-        @edit="edit"
-        @remove="remove"
+          v-for="quote in filteredQuotes"
+          :key="quote.id"
+          :buttons="buttons"
+          :quote="quote"
+          @click="viewQuote(quote.id)"
+          @edit="edit"
+          @remove="remove"
       />
     </transition-group>
   </div>
   <my-modal v-model:show="modalVisible">
-    <quotes-item :quote="selectedQuote" />
+    <quotes-item :quote="selectedQuote"/>
   </my-modal>
   <my-modal v-model:show="editModal">
-    <create-form v-model="editForm" :text="'Edit'" @submit="submit" />
+    <create-form v-model="editForm" :text="'Edit'" @submit="submit"/>
   </my-modal>
   <my-modal v-model:show="removeModal">
     <div class="remove">
@@ -33,12 +33,12 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import QuotesItem from "@/components/quotes-item.vue";
 import CreateForm from "@/components/create-form.vue";
 
 export default {
-  components: { CreateForm, QuotesItem },
+  components: {CreateForm, QuotesItem},
   data() {
     return {
       modalVisible: false,
@@ -72,6 +72,7 @@ export default {
     edit(id) {
       this.editModal = true;
       this.editForm = this.filteredQuotes.find((el) => el.id === id);
+      console.log(this.editForm)
     },
     remove(id) {
       this.removeModal = true;
@@ -81,8 +82,9 @@ export default {
       this.removeModal = false;
     },
     submit() {
-      const { id } = this.editForm;
-      this.editQuote({ id: id, formData: this.editForm });
+      const {id} = this.editForm;
+      this.editForm.dateModified = Date.now();
+      this.editQuote({id: id, formData: this.editForm});
       this.hideModal();
     },
     deleteRequest() {
@@ -107,9 +109,14 @@ export default {
 
 <style lang="scss" scoped>
 .not-found--block {
-  font-size: 20px;
+  font-size: 44px;
   line-height: 22px;
   color: #181823;
+  width: 100%;
+}
+
+.quotes-list {
+  width: 100%;
 }
 
 .remove {
@@ -159,8 +166,8 @@ export default {
   transition: transform 0.4s ease;
 }
 
-@media (max-width: 900px)  {
-  .not-found--block{
+@media (max-width: 900px) {
+  .not-found--block {
     padding: 15px 0 !important;
   }
 }

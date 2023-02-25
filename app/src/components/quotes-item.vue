@@ -1,31 +1,36 @@
 <template>
   <div class="quote">
     <div class="quote--content p-10">
-      <div v-if="buttons" class="flex justify-end">
-        <button
-          class="quote--content-btns"
-          @click.stop="$emit('edit', quote.id)"
-        >
-          <img alt="icons" src="../../src/static/icons/pencil.svg" />
-        </button>
-        <button
-          class="quote--content-btns"
-          @click.stop="$emit('remove', quote.id)"
-        >
-          <img alt="icons" src="../../src/static/icons/delete.svg"  />
-        </button>
+      <div v-if="isEmpty" class="quote-empty">
+        I was empty... until i clicked the button bellow...
       </div>
-      <div class="quote--content-text">
-        {{ quote.content }}
-      </div>
-      <div class="quote--content-author">
-        <span>~{{ quote.author }}</span>
-      </div>
-      <div class="quote--content-tags">
-        <span class="mr-1">Tags:</span>
-        <span v-for="(tag, index) in quote.tags" :key="index" class="mr-1"
+      <div v-else>
+        <div v-if="buttons" class="flex justify-end">
+          <button
+              class="quote--content-btns"
+              @click.stop="$emit('edit', quote.id)"
+          >
+            <img alt="icons" src="../../src/static/icons/pencil.svg"/>
+          </button>
+          <button
+              class="quote--content-btns"
+              @click.stop="$emit('remove', quote.id)"
+          >
+            <img alt="icons" src="../../src/static/icons/delete.svg"/>
+          </button>
+        </div>
+        <div class="quote--content-text">
+          {{ quote.content }}
+        </div>
+        <div class="quote--content-author">
+          <span>~{{ quote.author }}</span>
+        </div>
+        <div class="quote--content-tags">
+          <span class="mr-1">Tags:</span>
+          <span v-for="(tag, index) in quote.tags" :key="index" class="mr-1"
           >{{ tag }}
         </span>
+        </div>
       </div>
     </div>
   </div>
@@ -45,6 +50,11 @@ export default {
       default: false,
     },
   },
+  computed: {
+    isEmpty() {
+      return Object.keys(this.quote).length === 0
+    }
+  }
 };
 </script>
 

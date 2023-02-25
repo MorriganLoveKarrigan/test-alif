@@ -5,6 +5,7 @@
     <my-input class="mt-4" v-model="modelValue.content" :placeholder="'Quote'" />
     <span class="validate-error" v-if="validate.content">{{ validate.content }}</span>
     <my-input class="mt-4" v-model="modelValue.tags" :placeholder="'Tags'" />
+    <span class="validate-error" v-if="validate.tags">{{ validate.tags }}</span>
     <div class="flex justify-center">
       <my-button :text="text" @click="submitForm"/>
     </div>
@@ -32,6 +33,7 @@ export default {
       validate: {
         author: "",
         content: "",
+        tags:"",
       }
     }
   },
@@ -47,6 +49,14 @@ export default {
       if (!this.modelValue.content) {
         this.validate.content = 'Quote is required';
         isValid = false;
+      } else {
+        this.validate.content = ""
+      }
+      if (this.modelValue.tags.length === 0) {
+        this.validate.tags = "Tag/Tags required"
+        isValid = false;
+      } else {
+        this.validate.tags = ""
       }
       return isValid;
     },

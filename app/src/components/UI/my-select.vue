@@ -6,7 +6,7 @@
         @change="changeOption"
     >          By author
 
-      <option disabled value="">Sort by</option>
+      <option disabled value="">{{label}}</option>
       <option v-for="option in options" :key="option.value" :value="option.value">
         {{ option.text }}
       </option>
